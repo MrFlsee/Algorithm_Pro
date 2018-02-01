@@ -76,10 +76,15 @@ public class Solution {
             for (int i = 0; i < info.size(); i++) {
                 xy cur = info.get(i);
 
-                if(dist[cur.x] == -1)
+                if(dist[cur.x] == -1 && dist[cur.y] == -1)
                     continue;
+                
+                
+                
                 if(dist[cur.y] == -1)
                     dist[cur.y] = dist[cur.x] + cur.cost;
+                else if (dist[cur.x] == -1)
+					dist[cur.x] = dist[cur.y] + cur.cost;
                 else {
                     long dx = dist[cur.x];
                     long dy = dist[cur.y];
