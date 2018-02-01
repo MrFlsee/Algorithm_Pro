@@ -1,9 +1,6 @@
 package Algorithm_class.Day_9.Mouse;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.*;
 
 public class Solution {
@@ -78,9 +75,7 @@ public class Solution {
 
                 if(dist[cur.x] == -1 && dist[cur.y] == -1)
                     continue;
-                
-                
-                
+
                 if(dist[cur.y] == -1)
                     dist[cur.y] = dist[cur.x] + cur.cost;
                 else if (dist[cur.x] == -1)
