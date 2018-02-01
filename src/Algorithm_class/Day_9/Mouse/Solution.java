@@ -83,10 +83,13 @@ public class Solution {
                 else {
                     long dx = dist[cur.x];
                     long dy = dist[cur.y];
-                    dist[cur.y] = dx + cur.cost;
-                    dist[cur.x] = dy + cur.cost;
-                }
-            }
+                    if (dist[cur.y] < dx + cur.cost) {
+                        dist[cur.y] = dx + cur.cost;
+                    }
+                    if (dist[cur.x] < dy + cur.cost) {
+                        dist[cur.x] = dy + cur.cost;
+                    }
+                }            }
 
             long ans = 0;
             for (int i = 1; i <= n; i++) {
