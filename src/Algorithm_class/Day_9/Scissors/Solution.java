@@ -32,13 +32,54 @@ public class Solution {
 
                 if(mn > a[i])
                     mn = a[i];
+
+                if (i == 0) {
+                    D[0][i] = a[i];
+                } else {
+                    D[0][i] = mx - mn;
+                }
             }
 
-            D[0][n] = mx - mn;
+//            D[0][n] = mx - mn;
+//            System.out.println(D[0][n]);
+            for (int i = 1; i <= k; i++) {
+                for (int j = 0; j <= n; j++) {
+                    int min = (int) 1e9;
+                    for (int l = 0; l < j; l++) {
+                        int v = Math.max(D[i - 1][l], findV(l + 1, j));
+                        if (min > v) {
+                            min = v;
+                        }
+                    }
+                    if (j == 0) {
+                        D[i][j] = D[i - 1][j];
+                    } else {
+                        D[i][j] = min;
+                    }
+                }
 
-
+            }
+            System.out.println("#" + t + " " + D[k][n]);
 
         }
+    }
+
+    private static int findV(int s, int e) {
+        int mx = -1;
+        int mn = (int) 1e9;
+
+        if (s == e) {
+            return a[s];
+        }
+
+        for (int i = s; i <= e; i++) {
+            if(mx < a[i])
+                mx = a[i];
+
+            if(mn > a[i])
+                mn = a[i];
+        }
+        return mx-mn;
     }
 
 
