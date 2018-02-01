@@ -24,14 +24,14 @@ public class Solution {
             this.cost = cost;
         }
 
-        @Override
+       /* @Override
         public String toString() {
             return "xy{" +
                     "x=" + x +
                     ", y=" + y +
                     ", cost=" + cost +
                     '}';
-        }
+        }*/
 
         @Override
         public int compareTo(xy o) {
@@ -39,7 +39,7 @@ public class Solution {
         }
     }
 
-    static xy[] info = new xy[121212];
+    static xy[] info = new xy[321212];
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -81,7 +81,7 @@ public class Solution {
                 if(dist[cur.x] == -1)
                     continue;
                 if(dist[cur.y] == -1)
-                    dist[cur.y] = cur.cost;
+                    dist[cur.y] = dist[cur.x] + cur.cost;
                 else {
                     long dx = dist[cur.x];
                     long dy = dist[cur.y];
@@ -95,7 +95,7 @@ public class Solution {
                 ans += dist[i];
             }
 
-            bw.write(String.valueOf(ans) + "\n");
+            bw.write("#" + String.valueOf(t) + " " + String.valueOf(ans) + "\n");
         }
 
         bw.flush();
