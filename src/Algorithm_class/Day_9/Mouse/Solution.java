@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Solution {
     static int T;
@@ -39,7 +36,8 @@ public class Solution {
         }
     }
 
-    static xy[] info = new xy[321212];
+//    static xy[] info = new xy[321212];
+    static ArrayList<xy> info;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -50,7 +48,7 @@ public class Solution {
             StringTokenizer s = new StringTokenizer(br.readLine());
             n = Integer.parseInt(s.nextToken());
             m = Integer.parseInt(s.nextToken());
-
+            info = new ArrayList<>();
 
             for (int i = 0; i < m; i++) {
                 s = new StringTokenizer(br.readLine());
@@ -59,11 +57,11 @@ public class Solution {
                 int b = Integer.parseInt(s.nextToken());
                 int c = Integer.parseInt(s.nextToken());
 
-                info[i] = new xy(a, b, c);
+                info.add(new xy(a, b, c));
+//                info.add(new xy(b, a, c));
             }
 
-            Arrays.sort(info, 0, m);
-
+            Collections.sort(info);
 
             /*for (int i = 0; i < m; i++) {
                 System.out.println(info[i]);
@@ -75,8 +73,8 @@ public class Solution {
                 dist[i] = -1;
             }
 
-            for (int i = 0; i < m; i++) {
-                xy cur = info[i];
+            for (int i = 0; i < info.size(); i++) {
+                xy cur = info.get(i);
 
                 if(dist[cur.x] == -1)
                     continue;
