@@ -43,7 +43,11 @@ public class Solution {
 
         @Override
         public int compareTo(info o) {
-            return this.time - o.time > 0 ? 1 : -1;
+            double k = this.time - o.time;
+            if (k == 0) {
+                return a[n].dense - a[o.n].dense;
+            }
+            return k > 0 ? 1 : -1;
         }
 
         @Override
