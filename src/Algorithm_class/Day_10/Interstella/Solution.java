@@ -11,10 +11,10 @@ public class Solution {
     static int n, m, k;
     static class pair implements Comparable<pair>{
         int n;
-        long dist;
+        int dist;
         int p;
 
-        public pair(int n, long dist, int p) {
+        public pair(int n, int dist, int p) {
             this.n = n;
             this.dist = dist;
             this.p = p;
@@ -67,13 +67,13 @@ public class Solution {
             while (!pq.isEmpty()) {
                 pair here = pq.poll();
 
+//                if (here.n == e) {
+//                    break;
+//                }
 
                 if(dist[here.p][here.n] != here.dist)
                     continue;
 
-                if (here.p == k && here.n == e) {
-                    break;
-                }
 
                 for (pair there : adj[here.n]) {
                     if (dist[here.p][there.n] == -1 || dist[here.p][there.n] > here.dist + there.dist) {
@@ -81,14 +81,24 @@ public class Solution {
                         pq.offer(new pair(there.n, here.dist + there.dist, here.p));
                     }
 
-                    if (here.p < 2 && (dist[here.p + 1][there.n] == -1 || dist[here.p + 1][there.n] > here.dist + 1)) {
+                    if (k != 0 && here.p < 2 && (dist[here.p + 1][there.n] == -1 || dist[here.p + 1][there.n] > here.dist + 1)) {
                         dist[here.p+1][there.n] = here.dist + 1;
                         pq.offer(new pair(there.n, here.dist + 1, here.p + 1));
                     }
                 }
+
+
+            }
+            bw.write("#" + t + " " + String.valueOf(dist[2][e]) + "\n");
+
+            for (int i = 0; i < 3; i++) {
+                for (int j = 1; j <= n; j++) {
+                    System.out.printf("%3d", dist[i][j]);
+                }
+                System.out.println();
             }
 
-            bw.write("#" + t + " " + String.valueOf(dist[k][e]) + "\n");
+            System.out.println();
         }
         bw.flush();
         bw.close();
