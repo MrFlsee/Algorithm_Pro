@@ -43,12 +43,13 @@ public class Solution {
             m = Integer.parseInt(st.nextToken());
             k = Integer.parseInt(st.nextToken());
 
-            for (int i = 1; i <= n; i++) {
-                adj[i] = new ArrayList<>();
-            }
+//            for (int i = 1; i <= n; i++) {
+//                adj[i] = new ArrayList<>();
+//            }
             for (int i = 0; i < 3; i++) {
                 for (int j = 1; j <= n; j++) {
                     dist[i][j] = -1;
+                    adj[j] = new ArrayList<>();
                 }
             }
             for (int i = 0; i < m; i++) {
@@ -70,10 +71,9 @@ public class Solution {
 
             while (!pq.isEmpty()) {
                 pair here = pq.poll();
-//                if (visited[here.n]) {
-//                    continue;
-//                }
-//                visited[here.n] = true;
+
+                if(dist[here.p][here.n] != here.dist)
+                    continue;
 
                 for (pair there : adj[here.n]) {
                     if (dist[here.p][there.n] == -1 || dist[here.p][there.n] > here.dist + there.dist) {
@@ -97,14 +97,14 @@ public class Solution {
 //
 //            System.out.println();
 
-            long ans = (long) 1e19;
-            for (int i = 0; i <= k; i++) {
-                if (ans > dist[i][e]) {
-                    ans = dist[i][e];
-                }
-            }
+//            long ans = (long) 1e19;
+//            for (int i = 0; i <= k; i++) {
+//                if (ans > dist[i][e]) {
+//                    ans = dist[i][e];
+//                }
+//            }
 
-            bw.write("#" + t + " " + String.valueOf(ans) + "\n");
+            bw.write("#" + t + " " + String.valueOf(dist[k][e]) + "\n");
         }
         bw.flush();
         bw.close();
