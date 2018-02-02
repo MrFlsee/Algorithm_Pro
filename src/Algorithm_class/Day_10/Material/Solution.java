@@ -13,10 +13,12 @@ import java.util.StringTokenizer;
 public class Solution {
     static int T;
     static int n;
-    static class M implements Comparable<M>{
-        int n, x, y, area, v, dense;
 
-        public M(int n, int x, int y, int area, int v, int dense) {
+    static class M implements Comparable<M> {
+        int n;
+        double x, y, area, v, dense;
+
+        public M(int n, double x, double y, double area, double v, double dense) {
             this.n = n;
             this.x = x;
             this.y = y;
@@ -27,12 +29,14 @@ public class Solution {
 
         @Override
         public int compareTo(M o) {
-            return o.dense - this.dense;
+            return this.dense - o.dense > 0 ? -1 : 1;
         }
     }
+
     static M[] a = new M[1212];
     static info[] D = new info[1212];
-    static class info implements Comparable<info>{
+
+    static class info implements Comparable<info> {
         int n;
         double time;
 
@@ -45,7 +49,7 @@ public class Solution {
         public int compareTo(info o) {
             double k = this.time - o.time;
             if (k == 0) {
-                return a[n].dense - a[o.n].dense;
+                return a[n].dense - a[o.n].dense > 0 ? 1 : -1;
             }
             return k > 0 ? 1 : -1;
         }
@@ -67,13 +71,13 @@ public class Solution {
         for (int t = 1; t <= T; t++) {
             n = Integer.parseInt(br.readLine());
 
-            StringTokenizer s ;
+            StringTokenizer s;
             for (int i = 1; i <= n; i++) {
                 s = new StringTokenizer(br.readLine());
                 a[i] = new M(i, Integer.parseInt(s.nextToken()), Integer.parseInt(s.nextToken()), Integer.parseInt(s.nextToken()), Integer.parseInt(s.nextToken()), Integer.parseInt(s.nextToken()));
             }
 
-            Arrays.sort(a, 1, n);
+            Arrays.sort(a, 1, n+1);
 
             StringBuffer sb = new StringBuffer();
 
@@ -84,7 +88,7 @@ public class Solution {
                 int minj = 0;
                 for (int j = 1; j < i; j++) {
                     double time = getTime(i, j);
-                    if (D[j].time > time && min > time) {
+                    if (D[j].time >= time && min > time) {
                         min = time;
                         minj = a[i].n;
                     }
@@ -98,7 +102,7 @@ public class Solution {
 //
 //            System.out.println();
 
-            Arrays.sort(D, 1, n+1);
+            Arrays.sort(D, 1, n + 1);
 
             bw.write("#" + t + " ");
             for (int i = 1; i <= n; i++) {
@@ -114,13 +118,14 @@ public class Solution {
         M A = a[c1];
         M B = a[c2];
 
-        return (max(abs(B.y - A.y), abs(B.x - A.x)) - (A.area + B.area) * 0.5) / (A.v + B.v);
+        return (max(abs(B.y - A.y), abs(B.x - A.x)) * 2 - (A.area + B.area)) / ((A.v + B.v)*2) ;
     }
 
-    private static int abs(int n) {
+    private static double abs(double n) {
         return (n < 0) ? -n : n;
     }
-    private static int max(int a, int b) {
+
+    private static double max(double a, double b) {
         return (a > b) ? a : b;
     }
 
