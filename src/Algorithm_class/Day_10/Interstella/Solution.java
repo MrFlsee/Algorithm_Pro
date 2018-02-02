@@ -67,8 +67,13 @@ public class Solution {
             while (!pq.isEmpty()) {
                 pair here = pq.poll();
 
+
                 if(dist[here.p][here.n] != here.dist)
                     continue;
+
+                if (here.p == k && here.n == e) {
+                    break;
+                }
 
                 for (pair there : adj[here.n]) {
                     if (dist[here.p][there.n] == -1 || dist[here.p][there.n] > here.dist + there.dist) {
