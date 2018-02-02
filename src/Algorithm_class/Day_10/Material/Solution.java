@@ -49,7 +49,7 @@ public class Solution {
         public int compareTo(info o) {
             double k = this.time - o.time;
             if (k == 0) {
-                return a[n].dense - a[o.n].dense > 0 ? 1 : -1;
+                return a[n].dense - a[o.n].dense > 0 ? -1 : 1;
             }
             return k > 0 ? 1 : -1;
         }
@@ -88,7 +88,7 @@ public class Solution {
                 int minj = 0;
                 for (int j = 1; j < i; j++) {
                     double time = getTime(i, j);
-                    if (D[j].time >= time && min > time) {
+                    if (D[j].time > time && min > time) {
                         min = time;
                         minj = a[i].n;
                     }
@@ -118,7 +118,7 @@ public class Solution {
         M A = a[c1];
         M B = a[c2];
 
-        return (max(abs(B.y - A.y), abs(B.x - A.x)) * 2 - (A.area + B.area)) / ((A.v + B.v)*2) ;
+        return (max(abs(B.y - A.y), abs(B.x - A.x)) * 2 - (A.area + B.area)) / ((A.v + B.v)) ;
     }
 
     private static double abs(double n) {
