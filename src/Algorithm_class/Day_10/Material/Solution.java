@@ -1,7 +1,9 @@
 package Algorithm_class.Day_10.Material;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -30,7 +32,7 @@ public class Solution {
     }
     static M[] a = new M[1212];
     static info[] D = new info[1212];
-    static class info {
+    static class info implements Comparable<info>{
         int n;
         double time;
 
@@ -38,18 +40,32 @@ public class Solution {
             this.n = n;
             this.time = time;
         }
+
+        @Override
+        public int compareTo(info o) {
+            return this.time - o.time > 0 ? 1 : -1;
+        }
+
+        @Override
+        public String toString() {
+            return "info{" +
+                    "n=" + n +
+                    ", time=" + time +
+                    '}';
+        }
     }
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         T = Integer.parseInt(br.readLine());
 
-        for (int t = 0; t <= T; t++) {
+        for (int t = 1; t <= T; t++) {
             n = Integer.parseInt(br.readLine());
 
-            StringTokenizer s = new StringTokenizer(br.readLine());
+            StringTokenizer s ;
             for (int i = 1; i <= n; i++) {
+                s = new StringTokenizer(br.readLine());
                 a[i] = new M(i, Integer.parseInt(s.nextToken()), Integer.parseInt(s.nextToken()), Integer.parseInt(s.nextToken()), Integer.parseInt(s.nextToken()), Integer.parseInt(s.nextToken()));
             }
 
@@ -66,12 +82,28 @@ public class Solution {
                     double time = getTime(i, j);
                     if (D[j].time > time && min > time) {
                         min = time;
-                        minj = j;
+                        minj = a[i].n;
                     }
                 }
                 D[i] = new info(minj, min);
             }
+
+//            for (int i = 1; i <= n; i++) {
+//                System.out.print(D[i]);
+//            }
+//
+//            System.out.println();
+
+            Arrays.sort(D, 1, n+1);
+
+            bw.write("#" + t + " ");
+            for (int i = 1; i <= n; i++) {
+                bw.write(String.valueOf(D[i].n + " "));
+            }
+            bw.write("\n");
         }
+
+        bw.flush();
     }
 
     private static double getTime(int c1, int c2) {
