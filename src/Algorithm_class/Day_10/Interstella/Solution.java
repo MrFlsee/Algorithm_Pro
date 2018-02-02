@@ -31,7 +31,7 @@ public class Solution {
     }
     static ArrayList<pair>[] adj = new ArrayList[121212];
     static long[][] dist = new long[3][121212];
-    static boolean[] visited = new boolean[121212];
+    static boolean[][] visited = new boolean[3][121212];
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -43,9 +43,9 @@ public class Solution {
             m = Integer.parseInt(st.nextToken());
             k = Integer.parseInt(st.nextToken());
 
-//            for (int i = 1; i <= n; i++) {
-//                adj[i] = new ArrayList<>();
-//            }
+            for (int i = 1; i <= n; i++) {
+                adj[i] = new ArrayList<>();
+            }
             for (int i = 0; i < 3; i++) {
                 for (int j = 1; j <= n; j++) {
                     dist[i][j] = -1;
