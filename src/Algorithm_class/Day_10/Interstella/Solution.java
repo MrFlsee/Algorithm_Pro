@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Solution {
     static int T;
@@ -29,9 +26,8 @@ public class Solution {
         }
 
     }
-    static ArrayList<pair>[] adj = new ArrayList[121212];
-    static long[][] dist = new long[3][121212];
-    static boolean[][] visited = new boolean[3][121212];
+    static ArrayList<pair>[] adj = new ArrayList[100002];
+    static long[][] dist;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -46,22 +42,17 @@ public class Solution {
             for (int i = 1; i <= n; i++) {
                 adj[i] = new ArrayList<>();
             }
+
+            dist = new long[3][n + 1];
             for (int i = 0; i < 3; i++) {
-                for (int j = 1; j <= n; j++) {
-                    dist[i][j] = -1;
-                }
+                Arrays.fill(dist[i], -1);
             }
+
             for (int i = 0; i < m; i++) {
                 st = new StringTokenizer(br.readLine());
                 int u = Integer.parseInt(st.nextToken());
                 int v = Integer.parseInt(st.nextToken());
                 int c = Integer.parseInt(st.nextToken());
-                if (adj[u] == null) {
-                    adj[u] = new ArrayList<>();
-                }
-                if (adj[v] == null) {
-                    adj[v] = new ArrayList<>();
-                }
                 adj[u].add(new pair(v, c, 0));
                 adj[v].add(new pair(u, c, 0));
             }
@@ -91,22 +82,6 @@ public class Solution {
                     }
                 }
             }
-
-//            for (int i = 0; i <= 2; i++) {
-//                for (int j = 1; j <= n; j++) {
-//                    System.out.printf("%3d", dist[i][j]);
-//                }
-//                System.out.println();
-//            }
-//
-//            System.out.println();
-
-//            long ans = (long) 1e19;
-//            for (int i = 0; i <= k; i++) {
-//                if (ans > dist[i][e]) {
-//                    ans = dist[i][e];
-//                }
-//            }
 
             bw.write("#" + t + " " + String.valueOf(dist[k][e]) + "\n");
         }
