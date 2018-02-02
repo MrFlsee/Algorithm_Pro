@@ -49,7 +49,6 @@ public class Solution {
             for (int i = 0; i < 3; i++) {
                 for (int j = 1; j <= n; j++) {
                     dist[i][j] = -1;
-                    adj[j] = new ArrayList<>();
                 }
             }
             for (int i = 0; i < m; i++) {
@@ -57,7 +56,12 @@ public class Solution {
                 int u = Integer.parseInt(st.nextToken());
                 int v = Integer.parseInt(st.nextToken());
                 int c = Integer.parseInt(st.nextToken());
-
+                if (adj[u] == null) {
+                    adj[u] = new ArrayList<>();
+                }
+                if (adj[v] == null) {
+                    adj[v] = new ArrayList<>();
+                }
                 adj[u].add(new pair(v, c, 0));
                 adj[v].add(new pair(u, c, 0));
             }
